@@ -20,7 +20,7 @@ class App extends Component {
         const newContacts = response.data.map(c => {
           return {
             id: c.id,
-            name: c.name
+            name: c
           };
         });
 

@@ -5,7 +5,10 @@ import "./Contact.css";
 function Contact(props) {
   return (
     <div className="contact">
-      <span>{props.name}</span>
+    <span>{props.name.id} {props.name.name}</span><br/>
+      <span>{props.name.address.street}</span><br/>
+      <span>{props.name.address.suite}</span><br/>
+      <span>{props.name.address.city} {props.name.address.zipcode}</span>
     </div>
   );
 }
