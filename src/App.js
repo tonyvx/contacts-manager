@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-
 import axios from "axios";
 
 import ContactList from "./components/ContactList";
@@ -14,13 +13,15 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then(response => {
+      .get("http://localhost:8080/track/ups/1ZX704780346928141", {
+        headers: {
+            'Accept': 'application/json', 'Access-Control-Allow-Origin' : '*'
+        }}).then(response => {
         // create an array of contacts only with relevant data
-        const newContacts = response.data.map(c => {
+        const newContacts = response.data.shipment[0].package[0].activity.map(c => {
           return {
             id: c.id,
-            name: c
+            name: JSON.stringify(c)
           };
         });
 
