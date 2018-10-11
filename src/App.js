@@ -13,7 +13,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/track/ups/1ZX704780346928141", {
+      .get("http://logistics.avx007.org/track/ups/1ZX704780346928141", {
         headers: {
             'Accept': 'application/json', 'Access-Control-Allow-Origin' : '*'
         }}).then(response => {
@@ -21,7 +21,7 @@ class App extends Component {
         const newContacts = response.data.shipment[0].package[0].activity.map(c => {
           return {
             id: c.id,
-            name: JSON.stringify(c)
+            name: c.date + " " + c.time + " : " + c.status.description
           };
         });
 
