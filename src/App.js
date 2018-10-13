@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import {
+  Route
+} from "react-router-dom";
 import logo from "./logo.svg";
+import Test from "./components/Test";
 import "./App.css";
 import axios from "axios";
 
@@ -7,23 +11,31 @@ import ContactList from "./components/ContactList";
 
 class App extends Component {
   // default state object
-  state = {
-    contacts: []
-  };
 
+  
+
+  state = {
+    contacts: [],
+    id: '1ZX704780346928141'
+  };
+  
   componentDidMount() {
     axios
-      .get("http://logistics.avx007.org/track/ups/1ZX704780346928141", {
+      .get("http://logistics.avx007.org/track/ups/"+this.state.id, {
         headers: {
-            'Accept': 'application/json', 'Access-Control-Allow-Origin' : '*'
-        }}).then(response => {
+          Accept: "application/json"
+        }
+      })
+      .then(response => {
         // create an array of contacts only with relevant data
-        const newContacts = response.data.shipment[0].package[0].activity.map(c => {
-          return {
-            id: c.id,
-            name: c.date + " " + c.time + " : " + c.status.description
-          };
-        });
+        const newContacts = response.data.shipment[0].package[0].activity.map(
+          c => {
+            return {
+              id: c.id,
+              name: c.date + " " + c.time + " : " + c.status.description 
+            };
+          }
+        );
 
         // create a new "state" object without mutating
         // the original state object.
@@ -38,15 +50,22 @@ class App extends Component {
   }
 
   render() {
+    
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Contact Manager</h1>
-        </header>
+      <div>
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Delivery Updates</h1>
+          </header>
 
-        <ContactList contacts={this.state.contacts} />
-      </div>
+          <ContactList contacts={this.state.contacts} />
+          
+        </div>
+        <div className="content">
+          <Route path="/:id" component={Test}  />
+        </div>
+        
+        </div>
     );
   }
 }

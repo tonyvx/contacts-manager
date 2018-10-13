@@ -1,8 +1,9 @@
 .contact {
-  margin: 10px;
+  margin: 0px;
   padding: 10px;
-  border: 1px solid #bbb;
-  background-color: #eee;
+  border: 0px solid rgb(255, 253, 253);
+  background-color: rgb(255, 255, 255);
+  align-content: left
 }
 
 .contact span {
